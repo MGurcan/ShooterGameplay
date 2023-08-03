@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     public Material projectilePrefab;
 
+    public int totalEnemy;
+    public int currentEnemy = 0;
+
     private void Start()
     {
         mainCamera.farClipPlane = nearLRF;
@@ -58,9 +61,26 @@ public class GameManager : MonoBehaviour
         LoadGameData();
     }
 
+    public void EnemyCreated()
+    {
+        currentEnemy++;
+    }
     public void LoadGameData()
     {
         nickname.text = gameData.playerName;
+
+        if(gameData.selectedDifficulty == "Easy")
+        {
+            totalEnemy = 1;
+        }
+        else if (gameData.selectedDifficulty == "Medium")
+        {
+            totalEnemy = 2;
+        }
+        else if (gameData.selectedDifficulty == "Hard")
+        {
+            totalEnemy = 3;
+        }
 
         if (gameData.selectedCharacter == "Boss")
         {

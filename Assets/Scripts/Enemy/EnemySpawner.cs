@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +14,8 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     private float enemyHealth;
+
+    public GameManager gameManager;
     private void Start()
     {
         StartCoroutine(SpawnEnemies());
@@ -29,15 +30,18 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        while (true)
+        if(gameManager.currentEnemy < gameManager.totalEnemy)
         {
-            // Yeni düþman yaratma iþlemleri
-            GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-            newEnemy.GetComponent<NavMeshAgent>().destination = playerTransform.position;
-            newEnemy.GetComponent<EnemyMovement>().SetHealth(enemyHealth);
-            Debug.Log("Enemyhealth: " + enemyHealth);
-            // Bir sonraki düþmanýn yaratýlmasýný bekleyin
-            yield return new WaitForSeconds(spawnInterval);
+            while (true)
+            {
+                GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                newEnemy.GetComponent<NavMeshAgent>().destination = playerTransform.position;
+                newEnemy.GetComponent<EnemyMovement>().SetHealth(enemyHealth);
+
+                gameManager.EnemyCreated();
+
+                yield return new WaitForSeconds(spawnInterval);
+            }
         }
     }
 }

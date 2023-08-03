@@ -10,6 +10,7 @@ public class ShootingManager : MonoBehaviour
     public GameData gameData;
     public FinishData finishData;
 
+    public GameManager gameManager;
     [Header("Animation")]
     public Animator anim;
 
@@ -112,6 +113,13 @@ public class ShootingManager : MonoBehaviour
             weaponTemparature = 20f;
         }
         weaponTemparatureText.text = weaponTemparature.ToString("F1") + "°C";
+
+        if(totalKill >= gameManager.totalEnemy)
+        {
+            //game is won
+            SaveFinishDataWon();
+            SceneManager.LoadScene("FinishScene");
+        }
     }
 
     void Shoot(float shootLoadingDuration)
@@ -227,5 +235,16 @@ public class ShootingManager : MonoBehaviour
         finishData.totalKilledEnemy = totalKill;
         finishData.succesfullShot = totalSuccessfullHit;
         finishData.remainHealth = 0f;
+    }
+
+    public void SaveFinishDataWon()
+    {
+        finishData.totalDuration = totalDuration;
+        finishData.totalDamage = totalDamage;
+        finishData.enemyKillRanges = enemyKillRanges;
+        finishData.totalShot = totalShotTime;
+        finishData.totalKilledEnemy = totalKill;
+        finishData.succesfullShot = totalSuccessfullHit;
+        finishData.remainHealth = 100f;
     }
 }
