@@ -5,6 +5,9 @@
 https://github.com/MGurcan/ShooterGameplay/assets/78200658/8bcfd299-ba24-41e5-b0b7-3d487920a820
 
 
+# Video Youtube Link
+https://www.youtube.com/watch?v=yuFUKwUOTm8
+
 # Difficulties Handled
 * Character Avatars and Animations: I faced challenges when creating character avatars and animations for my project. However, I managed to overcome this by seeking assistance from Mixamo, a website that provides 3D models and animations for characters. Using Mixamo's resources, I successfully created realistic and dynamic animations for my characters.
 
