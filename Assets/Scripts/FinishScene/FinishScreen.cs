@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class FinishScreen : MonoBehaviour
 {
     public FinishData finishData;
+    public GameData gameData;
 
     public float remainHealth;
     public int totalShot;
@@ -24,6 +25,8 @@ public class FinishScreen : MonoBehaviour
     public TextMeshProUGUI totalKilledEnemyText;
 
     public TextMeshProUGUI enemyKillRangesText;
+
+    public GameObject[] weapons;
     private void Awake()
     {
         // Assign GameData reference if it's not already assigned
@@ -37,6 +40,25 @@ public class FinishScreen : MonoBehaviour
         Debug.Log("loaded data");
 
         Cursor.lockState = CursorLockMode.None;
+
+        if(gameData.selectedWeapon == "Quas")
+        {
+            weapons[0].SetActive(true);
+            weapons[1].SetActive(false);
+            weapons[2].SetActive(false);
+        }
+        else if (gameData.selectedWeapon == "Wex")
+        {
+            weapons[0].SetActive(false);
+            weapons[1].SetActive(true);
+            weapons[2].SetActive(false);
+        }
+        else if (gameData.selectedWeapon == "Exort")
+        {
+            weapons[0].SetActive(false);
+            weapons[1].SetActive(false);
+            weapons[2].SetActive(true);
+        }
     }
 
     public void LoadFinishData()
